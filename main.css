@@ -1,29 +1,31 @@
 .video-player{
-    height: 200px;
-    width: 400px;
+    height: 240px;
+    width: 320px;
     border: 3px solid;
     border-radius: 10px;
     overflow: hidden;
-    margin: 10px;
+    margin: 20px;
+    flex-grow: 2;
+    box-shadow: 3px 3px 1px rgba(0, 0, 0, 0.822);
 }
 body{
     margin: 0;
     padding: 0;
-    background-color:rgba(94, 255, 0, 0.815);
+    background:  radial-gradient(circle,#9ed7f8,#049cc2);
     color: rgba(0, 0, 0, 0.815);
-}
-.video-container{
-    height: 100px;
-    width: 150px;
-    margin: 10px;
 }
 #user-streams{
     display: flex;
     flex-wrap: wrap;
-    /* height: 100%; */
+    background:radial-gradient(circle, #39a2db,#002b42);
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    border-radius: 25px;
 }
 .user-uid{
     margin-left: 10px;
+    z-index: 2;
 }
 
 @media screen and (max-width:1400px) {
@@ -36,11 +38,11 @@ body{
 }
 #join-btn{
     height: 25px;
-    background-color: aliceblue;
-    color: black;
+    background-color: #002b42;
+    color: aliceblue;
     font-size: 25px;
     padding: 5px;
-    border: 2px solid;
+    /* border: 2px solid; */
     cursor: pointer;
     border-radius: 15px;
     position: absolute;
@@ -53,25 +55,31 @@ body{
     align-items: center;
     z-index: 2;
     position: sticky;
-    bottom: 20px;
+    bottom: 5px;
 }
-#buttons div{
-    background-color: rgb(12, 44, 3);
-    color: aliceblue;
+#buttons img{
+    border: 3px solid;
+    background-color: rgb(6, 79, 143);
     font-size: 25px;
     margin: 25px;
     padding: 5px;
     height: 25px;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 20px;
 }
-#buttons div:hover{
-    background-color: red;
-    color:  black;
-    border: 1px solid;
+#buttons img:hover{
+    font-size: 28px;
 }
+
 #enter{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#exit-btn:hover{
+    background-color: red;
+}
+h1{
+    font-family: 'Permanent Marker', cursive;
+    text-shadow: 2px 1px 1px aliceblue;
 }

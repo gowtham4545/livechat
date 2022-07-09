@@ -12,40 +12,44 @@ let localTracks = {
     videoTrack: null,
 }
 
-let localTrackState={
-    audioTrackMuted:false,
-    videoTrackMuted:false
+let localTrackState = {
+    audioTrackMuted: false,
+    videoTrackMuted: false
 }
 
 let remoteTracks = {}
 
-document.getElementById('audio-btn').addEventListener('click',async()=>{
-    if(!localTrackState.audioTrackMuted){
+document.getElementById('audio-btn').addEventListener('click', async () => {
+    if (!localTrackState.audioTrackMuted) {
         await localTracks.audioTrack.setMuted(true)
-        localTrackState.audioTrackMuted=true
+        localTrackState.audioTrackMuted = true
+        document.getElementById('audio-btn').style.backgroundColor='red'
     }
-    else{
+    else {
         await localTracks.audioTrack.setMuted(false)
-        localTrackState.audioTrackMuted=false
+        localTrackState.audioTrackMuted = false
+        document.getElementById('audio-btn').style.backgroundColor='#002b42'
     }
 })
 
-document.getElementById('camera-btn').addEventListener('click',async()=>{
-    if(!localTrackState.videoTrackMuted){
+document.getElementById('camera-btn').addEventListener('click', async () => {
+    if (!localTrackState.videoTrackMuted) {
         await localTracks.videoTrack.setMuted(true)
-        localTrackState.videoTrackMuted=true
+        localTrackState.videoTrackMuted = true
+        document.getElementById('camera-btn').style.backgroundColor='red'
     }
-    else{
+    else {
         await localTracks.videoTrack.setMuted(false)
-        localTrackState.videoTrackMuted=false
+        localTrackState.videoTrackMuted = false
+        document.getElementById('camera-btn').style.backgroundColor='#002b42'
     }
 })
 
 document.getElementById('join-btn').addEventListener('click', async () => {
     console.log('User Joined Stream');
-    document.getElementById('enter').style.visibility='hidden'
-    document.getElementById('buttons').style.visibility='visible'
+    document.getElementById('enter').style.visibility = 'hidden'
     await joinStreams()
+    document.getElementById('buttons').style.visibility = 'visible'
 })
 
 let joinStreams = async () => {
@@ -78,14 +82,14 @@ let handleUserJoined = async (user, mediaType) => {
 
     await client.subscribe(user, mediaType);
 
-    let videoPlayer=document.getElementById(`video-wrapper-${user.uid}`);
-    if(videoPlayer){
-        videoPlayer.remove()
-    }
-
+    
     if (mediaType === 'video') {
+        let videoPlayer = document.getElementById(`video-wrapper-${user.uid}`);
+        if (videoPlayer) {
+            videoPlayer.remove()
+        }
 
-        let videoPlayer = `
+        videoPlayer = `
         <div class="video-containers" id="video-wrapper-${user.uid}">
             <p class="user-uid">${user.uid}</p>
             <div class="video-player player" id="stream-${user.uid}"></div>
@@ -95,27 +99,27 @@ let handleUserJoined = async (user, mediaType) => {
         document.getElementById('user-streams').insertAdjacentHTML('beforeend', videoPlayer)
         user.videoTrack.play(`stream-${user.uid}`)
     }
-    if(mediaType==='audio'){
+    if (mediaType === 'audio') {
         user.audioTrack.play()
     }
 }
-let handleUserLeft = (user)=>{
+let handleUserLeft = (user) => {
     console.log('user left');
     delete remoteTracks[user.uid];
     document.getElementById(`video-wrapper-${user.uid}`).remove()
 }
 
-document.getElementById('exit-btn').addEventListener('click',async()=>{
-    for(trackName in localTracks){
+document.getElementById('exit-btn').addEventListener('click', async () => {
+    for (trackName in localTracks) {
         let track = localTracks[trackName]
-        if(track){
+        if (track) {
             track.stop()
             track.close()
-            localTracks[trackName]=null
+            localTracks[trackName] = null
         }
     }
     await client.leave()
-    document.getElementById('enter').style.visibility='visible'
-    document.getElementById('buttons').style.visibility='hidden'
-    document.getElementById('user-streams').innerHTML=''
+    document.getElementById('enter').style.visibility = 'visible'
+    document.getElementById('buttons').style.visibility = 'hidden'
+    document.getElementById('user-streams').innerHTML = ''
 })
