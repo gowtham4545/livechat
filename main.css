@@ -1,0 +1,77 @@
+.video-player{
+    height: 200px;
+    width: 400px;
+    border: 3px solid;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-color:rgba(94, 255, 0, 0.815);
+    color: rgba(0, 0, 0, 0.815);
+}
+.video-container{
+    height: 100px;
+    width: 150px;
+    margin: 10px;
+}
+#user-streams{
+    display: flex;
+    flex-wrap: wrap;
+    /* height: 100%; */
+}
+.user-uid{
+    margin-left: 10px;
+}
+
+@media screen and (max-width:1400px) {
+    main{
+        margin: 0 auto;
+        /* width: 1400px; */
+        height: 75vh;
+    }
+    
+}
+#join-btn{
+    height: 25px;
+    background-color: aliceblue;
+    color: black;
+    font-size: 25px;
+    padding: 5px;
+    border: 2px solid;
+    cursor: pointer;
+    border-radius: 15px;
+    position: absolute;
+    top: 100px;
+}
+#buttons{
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    position: sticky;
+    bottom: 20px;
+}
+#buttons div{
+    background-color: rgb(12, 44, 3);
+    color: aliceblue;
+    font-size: 25px;
+    margin: 25px;
+    padding: 5px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 15px;
+}
+#buttons div:hover{
+    background-color: red;
+    color:  black;
+    border: 1px solid;
+}
+#enter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
